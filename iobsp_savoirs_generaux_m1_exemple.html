@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Un rendez-vous, six phrases de trop</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">IOBSP · Savoirs généraux <span>/</span> Module 1</div><h1>Un rendez-vous, six phrases de trop</h1><p class="sous">Exemple commenté — Le contexte de l'activité d'IOBSP</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>La situation</h2>
+<div class="carte">
+<p>Thomas Leroy est agent commercial dans une agence immobilière. Il reçoit un couple d'acquéreurs, M. et Mme Ferreira, qui viennent de faire une offre sur un appartement. L'agence a signé une convention d'apport avec un courtier : Thomas est censé transmettre les coordonnées des acquéreurs intéressés, <b>RIEN DE PLUS</b>. Lisez ce qu'il leur dit, repérez les phrases qui le font sortir de son rôle, puis affichez la correction.</p>
+<div class="mail">
+ <div class="ent"><b>Entretien à l'agence</b> — compte rendu des propos de Thomas Leroy</div>
+ <div class="txt"><p>« Pour le financement, ne vous inquiétez pas, nous travaillons avec un courtier partenaire. »</p><p>« <span class="err">Avec vos deux salaires, vous obtiendrez sans problème du 3,2 % sur vingt ans.</span> <span class="cor">Je ne peux pas vous parler de taux : c'est le courtier qui étudiera votre situation.</span><span class="nf">1</span> »</p><p>« <span class="err">Tenez, je vous imprime une simulation de mensualités pour que vous voyiez à peu près.</span> <span class="cor">Je vous laisse sa carte ; avec votre accord, je lui transmets vos coordonnées.</span><span class="nf">2</span> »</p><p>« Et soyez tranquilles sur l'aspect légal : <span class="err">je ne fais que trois ou quatre dossiers par an, je suis sous les seuils.</span> <span class="cor">je ne présente pas de crédit moi-même : je vous mets seulement en contact.</span><span class="nf">3</span> »</p><p>« <span class="err">Si jamais la banque hésite, je peux même me porter garant des premières mensualités.</span> <span class="cor">La décision et ses conditions appartiennent à la banque.</span><span class="nf">4</span> »</p><p>« <span class="err">Le courtier vous facturera ses frais à la signature du compromis, c'est l'usage.</span> <span class="cor">Le courtier vous présentera ses conditions de rémunération par écrit.</span><span class="nf">5</span> »</p><p>« <span class="err">Franchement, avec un dossier comme le vôtre, c'est bon, vous l'avez.</span> <span class="cor">Le courtier vous dira quels établissements consulter ; la réponse viendra de la banque.</span><span class="nf">6</span> »</p></div>
+</div>
+<button class="btn" id="voir" onclick="document.body.classList.add('vu');this.style.display='none'">Afficher la correction</button>
+</div>
+
+<div class="liste">
+<h2><span class="num">2 ·</span>Les corrections, une par une</h2>
+<div class="carte">
+<table><thead><tr><th>N°</th><th>Point</th><th>Le raisonnement</th></tr></thead><tbody><tr><td><b>1</b></td><td>Présenter une opération</td><td>Annoncer un taux, c'est <b>PRÉSENTER</b> l'opération. Thomas remplit alors le critère d'intermédiation : il cesse d'être indicateur d'affaires (art. R. 519-5 CMF) et devient IOBSP — sans être immatriculé.</td></tr><tr><td><b>2</b></td><td>Travaux préparatoires</td><td>Remettre une simulation, c'est effectuer des « travaux et conseils préparatoires » à l'opération : c'est aussi de l'intermédiation au sens de l'article L. 519-1 CMF.</td></tr><tr><td><b>3</b></td><td>Seuils mal compris</td><td>Deux erreurs. Les seuils ne concernent que l'intermédiation <b>complémentaire</b> d'un bien ou d'un service, en pratique le crédit à la consommation : <b>il n'existe aucun seuil en crédit immobilier</b>. Et l'habitude n'est pas un volume : quelques dossiers répétés suffisent.</td></tr><tr><td><b>4</b></td><td>Ducroire</td><td>Se porter garant des échéances, c'est se porter <b>DUCROIRE</b> : on sort de la définition de l'IOBSP, et l'engagement par signature est lui-même une opération de crédit réservée aux établissements agréés (art. L. 311-1 CMF).</td></tr><tr><td><b>5</b></td><td>Rémunération prématurée</td><td>Un IOBSP ne peut percevoir aucune somme du client avant le <b>versement effectif des fonds prêtés</b> (art. L. 519-6 CMF), sauf s'il fournit un service de conseil indépendant. « À la signature du compromis », c'est bien avant.</td></tr><tr><td><b>6</b></td><td>Promesse d'octroi</td><td>La décision d'accorder le crédit appartient au seul établissement. Promettre l'accord engage la responsabilité de celui qui parle et prépare la réclamation du client si la banque refuse.</td></tr></tbody></table>
+</div>
+
+<h2><span class="num">3 ·</span>Ce qu'il faut en retenir</h2>
+<div class="carte"><div class="enc"><span class="t">CE QUE CET ENTRETIEN MONTRE</span>Le statut ne dépend pas de ce que l'on croit faire, mais de ce que l'on fait. Thomas pensait « rendre service » : en six phrases, il a présenté une opération, préparé un dossier, proposé un ducroire et promis un accord.</div><div class="enc al"><span class="t">CE QUE RISQUE L'AGENCE</span>Exercer l'intermédiation sans immatriculation expose à des sanctions, et l'agence répond des propos de son agent. Le client, lui, retient une promesse que personne ne peut tenir.</div><div class="enc ci"><span class="t">LA RÈGLE OPÉRATIONNELLE</span>L'indicateur d'affaires donne un nom et un numéro de téléphone, rien d'autre. D'où une convention d'apport écrite qui délimite précisément ce qu'il a le droit de dire.</div></div>
+</div>
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
